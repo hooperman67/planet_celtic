@@ -1,1 +1,8 @@
-
+requests
+feedparser
+sqlite3
+calendar
+time
+threading
+sys
+webbrowser
