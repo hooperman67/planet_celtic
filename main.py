@@ -81,14 +81,14 @@ def limpiar_base_datos(sql_conn):
 
 # Se escribe cabecera.html en el stream que se pasa como argumento
 def cabecera_html(fout):
-    fin = open("/cabecera.html", 'r')
+    fin = open("cabecera.html", 'r')
     for line in fin:
         fout.write(line)
     fin.close()
 
 # Se escribe pie.html en el stream que se la pasa como argumento
 def pie_html(fout):
-    fin = open("/pie.html", 'r')
+    fin = open("pie.html", 'r')
     for line in fin:
         fout.write(line)
     fin.close()
@@ -99,7 +99,7 @@ def generar_html(sql_conn):
     sql_cursor = sql_conn.cursor()
     archivo_actual = 'index.html'.format(pagina)
     archivo_anterior = None
-    fout = open('/index.html'.format(pagina), 'w')
+    fout = open('index.html'.format(pagina), 'w')
     cabecera_html(fout)
     # Sólo se muestran las entradas con fecha menor a la actual
     for row in sql_cursor.execute("select blog, titulo, enlace, fecha from feeds where fecha<? order by fecha desc", (int(time.time()),)):
@@ -123,7 +123,7 @@ def generar_html(sql_conn):
             archivo_actual = archivo_siguiente
             pie_html(fout)
             fout.close()
-            fout = open('/news-{0}.html'.format(pagina), 'w')
+            fout = open('posts/news-{0}.html'.format(pagina), 'w')
             cabecera_html(fout)
     fout.write('</table>')
     if archivo_anterior!= None:
@@ -134,11 +134,11 @@ def generar_html(sql_conn):
 def generar_rss(sql_conn):
     n = 0
     sql_cursor = sql_conn.cursor()
-    fout = open('/feed.xml', 'w')
+    fout = open('feed.xml', 'w')
     fout.write("""<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>\n""")
-    fin = open('/config.txt', 'r')
+    fin = open('config.txt', 'r')
     fout.write(fin.read())
     fin.close()
     for row in sql_cursor.execute("select blog, titulo, enlace, fecha from feeds order by fecha desc"):
@@ -226,7 +226,7 @@ sql_conn.commit()
 
 
 # Se busca el listado de blogs en "blogs_feeds.txt" y se procesan
-fin = open("/blogs_feeds.txt")
+fin = open("blogs_feeds.txt")
 semaforo = threading.Semaphore(10)  # Se permiten 10 a la vez
 semaforo_binario = threading.Semaphore(1)  # Semáforo que protege la base de datos
 hilos = []
@@ -260,6 +260,6 @@ for arg in sys.argv:
 
 if navegadorOk:
     # Se abre en el navegador la primera página de la celticnews:
-    webbrowser.open('/celticnews/index.html')
+    webbrowser.open('posts/index.html')
 
 print('Finalizado')
