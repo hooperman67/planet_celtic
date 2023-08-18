@@ -99,7 +99,7 @@ def generar_html(sql_conn):
     sql_cursor = sql_conn.cursor()
     archivo_actual = 'index.html'.format(pagina)
     archivo_anterior = None
-    fout = open('index.html'.format(pagina), 'w')
+    fout = open('posts/index.html'.format(pagina), 'w')
     cabecera_html(fout)
     # Sólo se muestran las entradas con fecha menor a la actual
     for row in sql_cursor.execute("select blog, titulo, enlace, fecha from feeds where fecha<? order by fecha desc", (int(time.time()),)):
@@ -134,7 +134,7 @@ def generar_html(sql_conn):
 def generar_rss(sql_conn):
     n = 0
     sql_cursor = sql_conn.cursor()
-    fout = open('feed.xml', 'w')
+    fout = open('posts/feed.xml', 'w')
     fout.write("""<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>\n""")
