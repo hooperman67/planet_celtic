@@ -40,7 +40,7 @@
 
 import requests
 import feedparser
-import sqlite
+import pysqlite
 import calendar
 import time
 import threading
