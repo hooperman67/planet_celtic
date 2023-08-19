@@ -1,6 +1,6 @@
 requests
 feedparser
-pysqlite
+sqlite3
 calendar
 time
 threading
