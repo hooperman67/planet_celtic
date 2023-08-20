@@ -1,8 +1,13 @@
 name: run main.py
 
 on:
-  schedule:
-    - cron: '0 * /12 * * *' # At 00:00 hourly
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
 
 jobs:
   build:
