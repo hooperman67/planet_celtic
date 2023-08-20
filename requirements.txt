@@ -1,11 +1,2 @@
-requests
-feedparser
-sqlite3
-calendar
-time
-threading
-sys
-webbrowser
-logging
-logging.handlers
- os
+requests==2.28.1
+feedparser==6.0.8
