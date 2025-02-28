@@ -125,7 +125,7 @@ def generar_html(sql_conn):
     sql_cursor = sql_conn.cursor()
     archivo_actual = 'index.html'.format(pagina)
     archivo_anterior = None
-    fout = open('posts/index.html'.format(pagina), 'w')
+    fout = open('docs/index.html'.format(pagina), 'w')
     cabecera_html(fout)
     # Sólo se muestran las entradas con fecha menor a la actual
     for row in sql_cursor.execute("select blog, titulo, enlace, fecha from feeds where fecha<? order by fecha desc", (int(time.time()),)):
@@ -149,7 +149,7 @@ def generar_html(sql_conn):
             archivo_actual = archivo_siguiente
             pie_html(fout)
             fout.close()
-            fout = open('posts/news-{0}.html'.format(pagina), 'w')
+            fout = open('docs/news-{0}.html'.format(pagina), 'w')
             cabecera_html(fout)
     fout.write('</table>')
     if archivo_anterior!= None:
@@ -160,7 +160,7 @@ def generar_html(sql_conn):
 def generar_rss(sql_conn):
     n = 0
     sql_cursor = sql_conn.cursor()
-    fout = open('posts/feed.xml', 'w')
+    fout = open('docs/feed.xml', 'w')
     fout.write("""<?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
 <channel>\n""")
@@ -286,6 +286,6 @@ for arg in sys.argv:
 
 if navegadorOk:
     # Se abre en el navegador la primera página de la celticnews:
-    webbrowser.open('posts/index.html')
+    webbrowser.open('docs/index.html')
 
 print('Finalizado')
